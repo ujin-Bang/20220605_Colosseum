@@ -25,6 +25,7 @@ class MainActivity : BaseActivity() {
             val inputPw = binding.edtPassword.text.toString()
 
 //            서버에서 이메일/ 비번이 맞는 계정인지? 로그인 요청
+            ServerUtil.postRequestLogIn(inputEmail, inputPw)
         }
 
     }
