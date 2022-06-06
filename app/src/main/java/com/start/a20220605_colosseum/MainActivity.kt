@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.start.a20220605_colosseum.databinding.ActivityMainBinding
+import com.start.a20220605_colosseum.utils.ServerUtil
 
 class MainActivity : BaseActivity() {
 
@@ -29,6 +30,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
 
     }
 
