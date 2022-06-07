@@ -15,10 +15,11 @@ class SignUpActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_sign_up)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up)
         setupEvents()
         setValues()
     }
+
     override fun setupEvents() {
         binding.btnOk.setOnClickListener {
 
@@ -29,32 +30,50 @@ class SignUpActivity : BaseActivity() {
             val inputNickname = binding.edtNickname.text.toString()
 
 //            서버의 회원가입 기능에 전달(Request) -> 돌아온 응답 대응(Response)
-            ServerUtil.putRequestSignUp(inputEmail, inputPw, inputNickname, object : ServerUtil.JsonResponseHandler{
-                override fun onResponse(jsonObj: JSONObject) {
+            ServerUtil.putRequestSignUp(
+                inputEmail,
+                inputPw,
+                inputNickname,
+                object : ServerUtil.JsonResponseHandler {
+                    override fun onResponse(jsonObj: JSONObject) {
 
-                val code = jsonObj.getInt("code")
+                        val code = jsonObj.getInt("code")
 
-                    runOnUiThread {
-                        if(code == 200){
-                            Toast.makeText(mContext, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                        }
-                        else{
+                        runOnUiThread {
+                            if (code == 200) {
+//                      가입한 사람의 닉네임을 추출 -> 토스트로 환영메시지 띄우기
+
+                                val dataObj = jsonObj.getJSONObject("data")
+                                val userObj = dataObj.getJSONObject("user")
+                                val nickname = userObj.getString("nick_name")
+
+//                            토스트로 환영메시지 + 회원가입 화면 종료
+                                Toast.makeText(
+                                    mContext,
+                                    "${nickname}님 가입이 완료되었습니다.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+                                finish()
+
+                            } else {
 
 //                        실패 -> 서버가 알려주는 "message"에 담긴 실패 사유를 토스트로 띄우기
-                            val message = jsonObj.getString("message")
-                            Toast.makeText(mContext, "실패 사유 : ${message}", Toast.LENGTH_SHORT).show()
+                                val message = jsonObj.getString("message")
+                                Toast.makeText(mContext, "실패 사유 : ${message}", Toast.LENGTH_SHORT)
+                                    .show()
 
 
+                            }
                         }
+
+
                     }
 
-
-                }
-
-            })
+                })
         }
 
-     }
+    }
 
     override fun setValues() {
 
