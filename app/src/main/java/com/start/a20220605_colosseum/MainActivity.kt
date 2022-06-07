@@ -1,5 +1,6 @@
 package com.start.a20220605_colosseum
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -61,6 +62,10 @@ class MainActivity : BaseActivity() {
             })
         }
 
+        binding.btnMoveSignUp.setOnClickListener {
+            val myIntent = Intent(mContext, SignUpActivity::class.java)
+            startActivity(myIntent)
+        }
     }
 
     override fun setValues() {

@@ -7,8 +7,8 @@ import java.io.IOException
 
 class ServerUtil {
 
-    interface JsonResponseHandler{
-        fun onResponse( jsonObj: JSONObject )
+    interface JsonResponseHandler {
+        fun onResponse(jsonObj: JSONObject)
     }
 
     companion object {
@@ -16,14 +16,14 @@ class ServerUtil {
 //        여기에 적는 변수 / 함수는 => JAVA의 static에 대응됨
 //        클래스이름.기능() 로 활용 가능.
 
-//        모든 함수(기능) 가 공유할 서버 컴퓨터 주소.
+        //        모든 함수(기능) 가 공유할 서버 컴퓨터 주소.
         val HOST_URL = "http://54.180.52.26"
 
-//        로그인 함수 - POST
-        fun postRequestLogIn( email: String, pw: String, handler: JsonResponseHandler?){
+        //        로그인 함수 - POST
+        fun postRequestLogIn(email: String, pw: String, handler: JsonResponseHandler?) {
 
 //            1. 어디로 가야? URL
-            val urlString = "${ HOST_URL}/user"
+            val urlString = "${HOST_URL}/user"
 //            2. 어떤 데이터를 들고가는가?(파라미터)
             val formData = FormBody.Builder()
                 .add("email", email)
@@ -39,7 +39,7 @@ class ServerUtil {
 //              4. 완성된 Request를 실제로 호출 => 클라이언트 역할.
             val client = OkHttpClient()
 
-            client.newCall(request).enqueue( object : Callback{
+            client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
 
 //                    실패: 물리적 접속 실패.
@@ -66,5 +66,10 @@ class ServerUtil {
             })
         }
 
+
+
+
+        }
+
     }
-}
+

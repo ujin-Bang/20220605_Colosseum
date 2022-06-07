@@ -11,7 +11,6 @@
         tools:context=".MainActivity">
 
         <TextView
-            android:id="@+id/txtTest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="아이디"/>
@@ -41,6 +40,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="로그인"/>
+
+        <Button
+            android:id="@+id/btnMoveSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="회원가입 화면으로 이동"/>
 
     </LinearLayout>
 </layout>
