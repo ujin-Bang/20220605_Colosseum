@@ -16,7 +16,7 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setupEvents()
         setValues()
     }
@@ -29,37 +29,46 @@ class MainActivity : BaseActivity() {
             val inputPw = binding.edtPassword.text.toString()
 
 //            서버에서 이메일/ 비번이 맞는 계정인지? 로그인 요청
-            ServerUtil.postRequestLogIn(inputEmail, inputPw, object : ServerUtil.JsonResponseHandler{
-                override fun onResponse(jsonObj: JSONObject) {
+            ServerUtil.postRequestLogIn(
+                inputEmail,
+                inputPw,
+                object : ServerUtil.JsonResponseHandler {
+                    override fun onResponse(jsonObj: JSONObject) {
 
 //                    로그인 API를 호출하고 돌아온 상황.
 //                    결과로 jsonObj 하나를 받아서 돌아온 상황
-                    Log.d("화면에서의 jsonObj", jsonObj.toString())
+                        Log.d("화면에서의 jsonObj", jsonObj.toString())
 
-                    val code = jsonObj.getInt("code")
+                        val code = jsonObj.getInt("code")
 
 //                    code : 200 -> 로그인 성공 토스트
 //                    그 외 -> 로그인 실패 토스트
 
-                    runOnUiThread {
-                        if(code == 200){
-                            Toast.makeText(mContext, "로그인 성공", Toast.LENGTH_SHORT).show()
+                        runOnUiThread {
+                            if (code == 200) {
 
-                        }
-                        else{
+//                            연습문제.로그인 성공시 그 사람의 닉네임을 추출해서
+//                            "~~님, 환영합니다!" 문구로 토스트 출력하기
+                                val dataObj = jsonObj.getJSONObject("data")
+                                val userObj = dataObj.getJSONObject("user")
+                                val nickname = userObj.getString("nick_name")
+
+                                Toast.makeText(mContext, "${nickname}님, 환영합니다!", Toast.LENGTH_SHORT)
+                                    .show()
+                            } else {
 //                            message String으로 실패 사유를 알려준다.
 //                            JSON 파싱으로 추출해서 -> "로그인 실패" 대신 서버가 알려준 실패 사유를 띄우자.
-                            val message = jsonObj.getString("message")
-                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                                val message = jsonObj.getString("message")
+                                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
 
+                            }
                         }
+
+
                     }
 
 
-                }
-
-
-            })
+                })
         }
 
         binding.btnMoveSignUp.setOnClickListener {
@@ -72,7 +81,6 @@ class MainActivity : BaseActivity() {
 
 
     }
-
 
 
 }
