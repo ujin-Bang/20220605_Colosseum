@@ -22,27 +22,29 @@ class MainActivity : BaseActivity() {
 
     override fun setValues() {
 //        연습 - 내 정보 API 호출 -> 닉네임 추출 /UI 반영
-        getMyInfoFromServer()
+//        getMyInfoFromServer()
+
+//        실제 - 메인 화면의 데이터 받아오기 -> 토론 주제 목록 ->리스트뷰로 표기
 
     }
 
-    fun getMyInfoFromServer(){
-
-        ServerUtil.getRequestMyInfo(mContext, object : ServerUtil.JsonResponseHandler{
-            override fun onResponse(jsonObj: JSONObject) {
-
-                val dataObj = jsonObj.getJSONObject("data")
-                val userObj = dataObj.getJSONObject("user")
-                val nickname = userObj.getString("nick_name")
-
-                runOnUiThread {
-                    binding.txtUserNickname.text = nickname
-                }
-
-            }
-
-        })
-
-    }
+//    fun getMyInfoFromServer(){
+//
+//        ServerUtil.getRequestMyInfo(mContext, object : ServerUtil.JsonResponseHandler{
+//            override fun onResponse(jsonObj: JSONObject) {
+//
+//                val dataObj = jsonObj.getJSONObject("data")
+//                val userObj = dataObj.getJSONObject("user")
+//                val nickname = userObj.getString("nick_name")
+//
+//                runOnUiThread {
+//                    binding.txtUserNickname.text = nickname
+//                }
+//
+//            }
+//
+//        })
+//
+//    }
 
 }
