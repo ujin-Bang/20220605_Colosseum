@@ -2,6 +2,7 @@ package com.start.a20220605_colosseum
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.start.a20220605_colosseum.databinding.ActivityMainBinding
 import com.start.a20220605_colosseum.databinding.ActivitySignUpBinding
@@ -28,6 +29,29 @@ class SignUpActivity : BaseActivity() {
             val inputNickname = binding.edtNickname.text.toString()
 
 //            서버의 회원가입 기능에 전달(Request) -> 돌아온 응답 대응(Response)
+            ServerUtil.putRequestSignUp(inputEmail, inputPw, inputNickname, object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(jsonObj: JSONObject) {
+
+                val code = jsonObj.getInt("code")
+
+                    runOnUiThread {
+                        if(code == 200){
+                            Toast.makeText(mContext, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                        else{
+
+//                        실패 -> 서버가 알려주는 "message"에 담긴 실패 사유를 토스트로 띄우기
+                            val message = jsonObj.getString("message")
+                            Toast.makeText(mContext, "실패 사유 : ${message}", Toast.LENGTH_SHORT).show()
+
+
+                        }
+                    }
+
+
+                }
+
+            })
         }
 
      }
