@@ -26,6 +26,7 @@ class SignUpActivity : BaseActivity() {
             val inputEmail = binding.edtEmail.text.toString()
 
 //            서버에 중복 확인 기능 요청 ->ServerUtil 이용
+            ServerUtil.getRequestDuplCheck("EMAIL", inputEmail, null)
 
         }
 
