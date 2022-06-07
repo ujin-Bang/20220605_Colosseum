@@ -2,9 +2,11 @@ package com.start.a20220605_colosseum
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import com.start.a20220605_colosseum.adapters.TopicAdapter
 import com.start.a20220605_colosseum.databinding.ActivityMainBinding
 import com.start.a20220605_colosseum.datas.TopicData
 import com.start.a20220605_colosseum.utils.ServerUtil
+import okhttp3.internal.notify
 import org.json.JSONObject
 
 class MainActivity : BaseActivity() {
@@ -12,6 +14,8 @@ class MainActivity : BaseActivity() {
     lateinit var binding: ActivityMainBinding
 
     val mTopicList = ArrayList<TopicData>()
+
+    lateinit var mTopicAdapter : TopicAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +33,11 @@ class MainActivity : BaseActivity() {
 
 //        실제 - 메인 화면의 데이터 받아오기 -> 토론 주제 목록 ->리스트뷰로 표기
         getTopicListFromSever()
+
+//        어댑터 객체화 / 리스트뷰의 어댑터로 연결
+        mTopicAdapter = TopicAdapter(mContext, R.layout.topic_list_item, mTopicList)
+
+        binding.topicListView.adapter = mTopicAdapter
     }
 
     fun getTopicListFromSever(){
@@ -52,6 +61,15 @@ class MainActivity : BaseActivity() {
 
 //                    완성된 topicData => mTopicList에 추가.
                     mTopicList.add(topicData)
+                }
+
+//                어댑터 세팅보다, 서버의 데이터 수신이 더 늦을수도 있다.
+//                만약, 서버의 데이터 수신이 더 늦었다면 -> 어댑터 세팅 이후에 목록 추가
+//                리스트뷰를 구성하는 ArrayList에 내용물에 변화 발생.
+
+//                새로고침 처리 -> ListView UI 접근
+                runOnUiThread {
+                    mTopicAdapter.notifyDataSetChanged()
                 }
 
             }
