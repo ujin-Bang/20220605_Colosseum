@@ -12,16 +12,24 @@ class ContextUtil {
 
 //        token setter 함수
 
-        fun setToken( context: Context, token: String){
+        fun setToken(context: Context, token: String) {
 
-//            1.메모장 열기(prefName에 해당하는 SharedPrefernces 열기)
+//            1.메모장 열기(prefName에 해당하는 SharedPreferences 열기)
             val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
 
 //            2. 토큰값을 TOKEN항목에 저장.
             pref.edit().putString(TOKEN, token).apply()
         }
 
-//        token getter 함수
+        //        token getter 함수
+        fun getToken(context: Context): String {
+
+//            1. 메모장 열기
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+
+//            2.저장된 토큰값 리턴
+            return pref.getString(TOKEN, "")!!
+        }
 
     }
 
