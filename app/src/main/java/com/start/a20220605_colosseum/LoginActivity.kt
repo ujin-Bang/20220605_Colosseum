@@ -62,6 +62,9 @@ class LoginActivity : BaseActivity() {
 //                                SharedPreference라는 공간에 토큰값 저장
                                 ContextUtil.setToken(mContext, token)
 
+//                                로그인에 성공한 아이디로 입력한 이메일 -> SharedPreferences에 저장
+                                ContextUtil.setLoginEmail(mContext, inputEmail)
+
 //                                로그인 성공 후 메인으로 이동
                                 val myIntent = Intent(mContext, MainActivity::class.java)
                                 startActivity(myIntent)
