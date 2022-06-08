@@ -68,7 +68,7 @@ class ServerUtil {
             })
         }
 
-//      회원가입 함수 - PUT
+        //      회원가입 함수 - PUT
         fun putRequestSignUp(
             email: String,
             pw: String,
@@ -133,7 +133,7 @@ class ServerUtil {
 //            실제 API 호출 - client
             val client = OkHttpClient()
 
-            client.newCall(request).enqueue( object : Callback {
+            client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
 
                 }
@@ -150,8 +150,8 @@ class ServerUtil {
         }
 
 
-//        연습 - 내 정보 가져오기 (토큰첨부) - GET
-        fun getRequestMyInfo( context: Context, handler: JsonResponseHandler?) {
+        //        연습 - 내 정보 가져오기 (토큰첨부) - GET
+        fun getRequestMyInfo(context: Context, handler: JsonResponseHandler?) {
 
             val urlBuilder =
                 "${HOST_URL}/user_info".toHttpUrlOrNull()!!.newBuilder() //서버주소, 기능주소까지만.
@@ -165,13 +165,13 @@ class ServerUtil {
             val request = Request.Builder()
                 .url(urlString)
                 .get()
-                .header("X-Http-Token",ContextUtil.getToken(context))
+                .header("X-Http-Token", ContextUtil.getToken(context))
                 .build()
 
 //            실제 API 호출 - client
             val client = OkHttpClient()
 
-            client.newCall(request).enqueue( object : Callback {
+            client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
 
                 }
@@ -188,8 +188,8 @@ class ServerUtil {
         }
 
 
-//        메인화면의 데이터 가져오기(토론 주제 목록 가져오기) - GET
-        fun getRequestMainInfo( context: Context, handler: JsonResponseHandler?) {
+        //        메인화면의 데이터 가져오기(토론 주제 목록 가져오기) - GET
+        fun getRequestMainInfo(context: Context, handler: JsonResponseHandler?) {
 
             val urlBuilder =
                 "${HOST_URL}/v2/main_info".toHttpUrlOrNull()!!.newBuilder() //서버주소, 기능주소까지만.
@@ -203,13 +203,56 @@ class ServerUtil {
             val request = Request.Builder()
                 .url(urlString)
                 .get()
-                .header("X-Http-Token",ContextUtil.getToken(context))
+                .header("X-Http-Token", ContextUtil.getToken(context))
                 .build()
 
 //            실제 API 호출 - client
             val client = OkHttpClient()
 
-            client.newCall(request).enqueue( object : Callback {
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val bodyString = response.body!!.string()
+                    val jsonObj = JSONObject(bodyString)
+                    Log.d("서버응답", jsonObj.toString())
+                    handler?.onResponse(jsonObj)
+                }
+
+            })
+
+        }
+
+
+        //        토론 주제별 상세 조회하기 - GET
+        fun getRequestTopicDetail(context: Context, topicId: Int, handler: JsonResponseHandler?) {
+
+            val urlBuilder =
+                "${HOST_URL}/topic".toHttpUrlOrNull()!!.newBuilder() //서버주소, 기능주소까지만.
+
+//          주소양식 : Path - / topic/3 => /3 PathSegment라고 부름
+//          주소양식 : Query - /topic?name=조경진 QueryParameter라고 부름
+            urlBuilder.addPathSegment(topicId.toString())
+
+//            urlBuilder.addEncodedQueryParameter("type", type)
+//            urlBuilder.addEncodedQueryParameter("value", value)
+
+            val urlString = urlBuilder.toString()
+            Log.d("완성주소", urlString)
+
+//          Request를 만들때 헤더도 같이 첨부.
+            val request = Request.Builder()
+                .url(urlString)
+                .get()
+                .header("X-Http-Token", ContextUtil.getToken(context))
+                .build()
+
+//            실제 API 호출 - client
+            val client = OkHttpClient()
+
+            client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
 
                 }

@@ -28,6 +28,12 @@ class ViewTopicDetailActivity : BaseActivity() {
 
         binding.txtTopicTitle.text = mTopicData.title
         Glide.with(mContext).load(mTopicData.imageURL).into(binding.imgTopic)
+
+//        현재 진행상황 조회 API 호출해보자. -> 토론진영 목록/ 몇표 획득
+        getTopicDetailFromSever()
+    }
+    fun getTopicDetailFromSever(){
+
     }
 
 
