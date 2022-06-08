@@ -1,5 +1,6 @@
 package com.start.a20220605_colosseum
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.start.a20220605_colosseum.adapters.TopicAdapter
@@ -24,6 +25,12 @@ class MainActivity : BaseActivity() {
         setValues()
     }
     override fun setupEvents() {
+
+        binding.topicListView.setOnItemClickListener { parent, view, position, id ->
+
+            val myIntent = Intent(mContext, ViewTopicDetailActivity::class.java)
+            startActivity(myIntent)
+        }
 
     }
 
