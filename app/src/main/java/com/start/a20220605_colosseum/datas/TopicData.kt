@@ -15,6 +15,7 @@ class TopicData : Serializable {
 
     var replyCount = 0
 
+
 //    토론 주제의 하위 목록 -> 선택진영(SideData) 목록(ArrayList)
     var sideList = ArrayList<SideData>()
 
