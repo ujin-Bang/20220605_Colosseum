@@ -47,6 +47,25 @@ class ViewTopicDetailActivity : BaseActivity() {
             })
         }
 
+        binding.btnVote02.setOnClickListener {
+
+            ServerUtil.postRequestVote(mContext, mTopicData.sideList[1].id, object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(jsonObj: JSONObject) {
+
+                    val code = jsonObj.getInt("code")
+                    if(code == 200){
+                        getTopicDetailFromSever()
+                    }
+                    else {
+                        val message = jsonObj.getString("message")
+                        Toast.makeText(mContext, "실패 :${message}", Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+
+            })
+        }
+
     }
 
     override fun setValues() {
