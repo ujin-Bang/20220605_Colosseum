@@ -2,6 +2,7 @@ package com.start.a20220605_colosseum
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.start.a20220605_colosseum.databinding.ActivityViewTopicDetailBinding
@@ -28,6 +29,19 @@ class ViewTopicDetailActivity : BaseActivity() {
             ServerUtil.postRequestVote(mContext, mTopicData.sideList[0].id, object : ServerUtil.JsonResponseHandler{
                 override fun onResponse(jsonObj: JSONObject) {
 
+                    val code = jsonObj.getInt("code")
+                    if(code == 200){
+
+//                        득표수를 서버에서 다시 받아오자.(새로고침)
+//                        득표수? => 토론상세 조회 -> 선택진영 목록 -> 득표수 새로 파싱.
+                        getTopicDetailFromSever()
+                    }
+                    else{
+                        val message = jsonObj.getString("message")
+                        runOnUiThread {
+                            Toast.makeText(mContext, "실패 : ${message}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
 
             })
