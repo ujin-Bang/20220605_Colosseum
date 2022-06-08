@@ -27,7 +27,9 @@
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:text="토론 주제 표시 자리"
-            android:textSize="20sp"/>
+            android:fontFamily="@font/google_nanum"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
     </FrameLayout>
 
 </LinearLayout>
