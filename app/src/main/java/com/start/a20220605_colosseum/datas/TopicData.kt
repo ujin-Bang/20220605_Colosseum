@@ -1,6 +1,8 @@
 package com.start.a20220605_colosseum.datas
 
-class TopicData() {
+import java.io.Serializable
+
+class TopicData : Serializable {
 
 //    생성자 : 기본 생성자
 //    멤버변수만 따로 추가 -> JSON 파싱해서 변수에 채워넣자.
