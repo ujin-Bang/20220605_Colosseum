@@ -13,6 +13,8 @@ class TopicData : Serializable {
     var title = "" //String이 들어올 자리
     var imageURL = ""  // String이 들어올 자리
 
+    var replyCount = 0
+
     companion object{
 
 //        JSONObject -> TopicData형태로 변환해주는 함수 제작.
@@ -25,6 +27,8 @@ class TopicData : Serializable {
             resultTopicData.id = jsonObj.getInt("id")
             resultTopicData.title = jsonObj.getString("title")
             resultTopicData.imageURL = jsonObj.getString("img_url")
+
+            resultTopicData.replyCount = jsonObj.getInt("reply_count")
 
             return resultTopicData
         }
