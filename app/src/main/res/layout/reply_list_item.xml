@@ -24,6 +24,17 @@
             android:layout_height="wrap_content"
             android:text="(진영)"/>
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txtCreatedAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2022/09/09 오전 5시 7분"/>
+
     </LinearLayout>
 
     <TextView
