@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21573736321000522" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_view_topic_detail.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/reply_list_item.xml" value="0.21354166666666666" />
         <entry key="app/src/main/res/layout/topic_list_item.xml" value="0.21458333333333332" />
       </map>
     </option>
