@@ -18,7 +18,7 @@ class ReplyData {
             replyData.content = jsonObj.getString("content")
 
             val userObj = jsonObj.getJSONObject("user")
-            replyData.writer = UserData.getUserDataFromServer(userObj)
+            replyData.writer = UserData.getUserDataFromJson(userObj)
 
             return replyData
 

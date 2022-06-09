@@ -33,8 +33,10 @@ class ReplyAdapter(
         val data = mList[position]
 
         val txtReplyContent = row.findViewById<TextView>(R.id.txtReplyContent)
+        val txtWriterNickname = row.findViewById<TextView>(R.id.txtWriterNickname)
 
         txtReplyContent.text = data.content
+        txtWriterNickname.text = data.writer.nickname
 
         return row
     }
