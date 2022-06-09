@@ -16,6 +16,13 @@ class ReplyData {
 //    언제 적힌 댓글?
     var createdAt = Calendar.getInstance() //기본 Calendar 대입 -> 현재일시가 저장됨.
 
+//    좋아요 / 싫어요 / 댓글 관련 숫자
+    var likeCount = 0
+    var dislikeCount = 0
+    var myLike = false
+    var myDislike = false
+    var replyCount = 0
+
 
 //    내 핸드폰의 시간을 고려해서, 시차를 보정해서 / 가공해서 작성일시를 알려주는 함수.
     fun getFormattedCreatedAt() : String {
@@ -67,6 +74,12 @@ class ReplyData {
 
 //            parse로 Date형태의 일시 생성 -> Calendar변수.time에 대입.
             replyData.createdAt.time = sdf.parse(createdAtStr)
+
+
+//            좋아요 / 싫어요 / 댓글 갯수 등등
+            replyData.likeCount = jsonObj.getInt("like_count")
+
+
             return replyData
 
         }
