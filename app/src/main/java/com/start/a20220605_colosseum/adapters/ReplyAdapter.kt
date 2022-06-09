@@ -74,6 +74,8 @@ class ReplyAdapter(
             ServerUtil.postRequestReplyLikeOrDislike(mContext, data.id, false, object : ServerUtil.JsonResponseHandler{
                 override fun onResponse(jsonObj: JSONObject) {
 
+                    (mContext as ViewTopicDetailActivity).getTopicDetailFromSever()
+
                 }
 
             })
