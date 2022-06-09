@@ -78,7 +78,10 @@ class ReplyData {
 
 //            좋아요 / 싫어요 / 댓글 갯수 등등
             replyData.likeCount = jsonObj.getInt("like_count")
-
+            replyData.dislikeCount = jsonObj.getInt("dislike_count")
+            replyData.myLike = jsonObj.getBoolean("my_like")
+            replyData.myDislike = jsonObj.getBoolean("my_dislike")
+            replyData.replyCount = jsonObj.getInt("reply_count")
 
             return replyData
 
