@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
+import com.start.a20220605_colosseum.adapters.ReplyAdapter
 import com.start.a20220605_colosseum.databinding.ActivityViewTopicDetailBinding
 import com.start.a20220605_colosseum.datas.ReplyData
 import com.start.a20220605_colosseum.datas.TopicData
@@ -18,6 +19,8 @@ class ViewTopicDetailActivity : BaseActivity() {
     lateinit var mTopicData: TopicData
 
     val mReplyList = ArrayList<ReplyData>()
+
+    lateinit var mReplyAdapter : ReplyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,6 +90,9 @@ class ViewTopicDetailActivity : BaseActivity() {
 
 //        현재 진행상황 조회 API 호출해보자. -> 토론진영 목록/ 몇표 획득
         getTopicDetailFromSever()
+
+        mReplyAdapter = ReplyAdapter(mContext, R.layout.reply_list_item, mReplyList)
+        binding.replyListView.adapter = mReplyAdapter
     }
 
     fun getTopicDetailFromSever() {
@@ -118,6 +124,13 @@ class ViewTopicDetailActivity : BaseActivity() {
                         val replyData = ReplyData.getReplyDataFromJson(replyObj)
 
                         mReplyList.add(replyData)
+                    }
+
+//                    서버가 더 늦게 끝났다면? 리스트뷰 내용 변경됨.
+                    runOnUiThread {
+
+                        mReplyAdapter.notifyDataSetChanged()
+
                     }
                 }
 
