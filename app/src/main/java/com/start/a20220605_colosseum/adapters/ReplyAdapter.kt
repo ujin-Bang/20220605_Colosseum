@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.start.a20220605_colosseum.R
 import com.start.a20220605_colosseum.datas.ReplyData
 import com.start.a20220605_colosseum.datas.TopicData
+import com.start.a20220605_colosseum.utils.ServerUtil
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 
 class ReplyAdapter(
@@ -54,6 +56,12 @@ class ReplyAdapter(
 //        각 줄의 좋아요 갯수에 이벤트 처리
          txtLikeCount.setOnClickListener{
 //             이 댓글에 좋아요를 남겼다고 -> 서버 API 호출
+             ServerUtil.postRequestReplyLikeOrDislike(mContext, data.id, true, object : ServerUtil.JsonResponseHandler{
+                 override fun onResponse(jsonObj: JSONObject) {
+
+                 }
+
+             })
          }
 
         txtDislikeCount.setOnClickListener {
