@@ -88,7 +88,7 @@ class ReReplyAdapter(
 
 //                     토론 상세 현황 화면의 기능 활용
 //                     => 토론 주제 상세 다시 가져오기.(댓글도 가져오게 됨)
-                     (mContext as ViewTopicDetailActivity).getTopicDetailFromSever()
+                     (mContext as ViewReplyDetailActivity).getReplyDetailFromServer()
 
                  }
 
@@ -100,7 +100,7 @@ class ReReplyAdapter(
             ServerUtil.postRequestReplyLikeOrDislike(mContext, data.id, false, object : ServerUtil.JsonResponseHandler{
                 override fun onResponse(jsonObj: JSONObject) {
 
-                    (mContext as ViewTopicDetailActivity).getTopicDetailFromSever()
+                    (mContext as ViewReplyDetailActivity).getReplyDetailFromServer()
 
                 }
 
