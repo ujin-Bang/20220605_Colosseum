@@ -1,5 +1,6 @@
 package com.start.a20220605_colosseum
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBar
@@ -56,6 +57,8 @@ abstract class BaseActivity : AppCompatActivity() {
 //        프로필 설정 화면으로 이동
         btnProfile.setOnClickListener {
 
+            val myIntent = Intent(mContext, MyProfileActivity::class.java)
+            startActivity(myIntent)
         }
     }
 }
