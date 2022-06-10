@@ -16,6 +16,7 @@
         <entry key="app/src/main/res/layout/activity_write_reply.xml" value="0.20052083333333334" />
         <entry key="app/src/main/res/layout/my_custom_action_bar.xml" value="0.21354166666666666" />
         <entry key="app/src/main/res/layout/reply_list_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/rereply_list_item.xml" value="0.21458333333333332" />
         <entry key="app/src/main/res/layout/topic_list_item.xml" value="0.21458333333333332" />
       </map>
     </option>
