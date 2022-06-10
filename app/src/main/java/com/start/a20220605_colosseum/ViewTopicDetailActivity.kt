@@ -3,6 +3,7 @@ package com.start.a20220605_colosseum
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
@@ -32,7 +33,6 @@ class ViewTopicDetailActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-
 //        onResume : 이 화면이 다시 나타날때마다 계속 실행되는 함수.
 //        화면에 돌아올때마다 -> 서버에서 다시 댓글 목록도 불러오게(자동 새로고침)
         getTopicDetailFromSever()
