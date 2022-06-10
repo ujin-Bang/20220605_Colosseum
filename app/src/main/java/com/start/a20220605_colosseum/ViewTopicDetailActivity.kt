@@ -34,6 +34,16 @@ class ViewTopicDetailActivity : BaseActivity() {
 
         binding.btnWriteReply.setOnClickListener {
 
+//            아직 투표를 하지 않은 주제라면, 의견 작성도 막아야함.
+
+//            내가 투표하지 않았다면, 강제종료.
+            if( mTopicData.mySide == null) {
+                Toast.makeText(mContext, "한 진영에 투표를 해야 의견을 작성할 수 있습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+//            투표했다면 어디에 투표했는지?
+
             val myIntent = Intent(mContext, WriteReplyActivity::class.java)
             startActivity(myIntent)
         }

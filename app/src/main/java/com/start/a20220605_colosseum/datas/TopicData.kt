@@ -19,6 +19,9 @@ class TopicData : Serializable {
 //    토론 주제의 하위 목록 -> 선택진영(SideData) 목록(ArrayList)
     var sideList = ArrayList<SideData>()
 
+//    내가 투표한 진영은 어디인가? => null일 가능성도 있다.
+    var mySide : SideData? = null
+
     companion object{
 
 //        JSONObject -> TopicData형태로 변환해주는 함수 제작.
@@ -44,6 +47,14 @@ class TopicData : Serializable {
                 val sideData = SideData.getSideDataFromJson(sideObj)
 
                 resultTopicData.sideList.add(sideData)
+            }
+
+//            내가 선택한 진영이 어딘지? 파싱 -> null 살태로 내려올 수도 있다.(투표 안했다면)
+//            jsonObj에게 파싱하려는 항목이 null이 아닌지? =>그때만 파싱하자.
+
+            if(!jsonObj.isNull("my_side")){
+
+                resultTopicData.mySide = SideData.getSideDataFromJson(jsonObj.getJSONObject("my_side"))
             }
 
 
