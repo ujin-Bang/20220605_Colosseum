@@ -1,6 +1,7 @@
 package com.start.a20220605_colosseum.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.start.a20220605_colosseum.R
+import com.start.a20220605_colosseum.ViewReplyDetailActivity
 import com.start.a20220605_colosseum.ViewTopicDetailActivity
 import com.start.a20220605_colosseum.datas.ReplyData
 import com.start.a20220605_colosseum.datas.TopicData
@@ -105,6 +107,12 @@ class ReplyAdapter(
                 }
 
             })
+        }
+
+        txtReplyCount.setOnClickListener {
+
+            val myIntent = Intent(mContext, ViewReplyDetailActivity::class.java)
+            mContext.startActivity(myIntent)
         }
 
         return row
