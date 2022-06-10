@@ -1,5 +1,6 @@
 package com.start.a20220605_colosseum
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -30,6 +31,12 @@ class ViewTopicDetailActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        binding.btnWriteReply.setOnClickListener {
+
+            val myIntent = Intent(mContext, WriteReplyActivity::class.java)
+            startActivity(myIntent)
+        }
 
         binding.btnVote01.setOnClickListener {
 

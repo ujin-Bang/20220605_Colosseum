@@ -3,6 +3,7 @@ package com.start.a20220605_colosseum
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.start.a20220605_colosseum.databinding.ActivityLoginBinding
@@ -102,6 +103,8 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+        btnBack.visibility = View.GONE
 
         binding.edtEmail.setText( ContextUtil.getLoginEmail(mContext) )
 

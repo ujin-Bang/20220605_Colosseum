@@ -35,9 +35,9 @@ class MyProfileActivity : BaseActivity() {
 
                 ContextUtil.setToken(mContext,"")
 
-//                화면 종료 -> (열려있는 모든 화면을 전부 닫고) SplashActivity로 이동.
+//                화면 종료 -> (열려있는 모든 화면을 전부 닫고: intent의 flag활용) SplashActivity로 이동.
                 val myIntent = Intent(mContext, SplashActivity::class.java)
-                myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                myIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(myIntent)
 
             })
