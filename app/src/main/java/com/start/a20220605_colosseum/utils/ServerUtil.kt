@@ -69,12 +69,7 @@ class ServerUtil {
         }
 
         //      회원가입 함수 - PUT
-        fun putRequestSignUp(
-            email: String,
-            pw: String,
-            nickname: String,
-            handler: JsonResponseHandler?
-        ) {
+        fun putRequestSignUp(email: String,pw: String,nickname: String,handler: JsonResponseHandler?) {
 
             val urlString = "${HOST_URL}/user"
 
@@ -227,12 +222,7 @@ class ServerUtil {
 
 
         //        토론 주제별 상세 조회하기 - GET
-        fun getRequestTopicDetail(
-            context: Context,
-            topicId: Int,
-            orderType: String,
-            handler: JsonResponseHandler?
-        ) {
+        fun getRequestTopicDetail(context: Context,topicId: Int,orderType: String,handler: JsonResponseHandler?) {
 
             val urlBuilder =
                 "${HOST_URL}/topic".toHttpUrlOrNull()!!.newBuilder() //서버주소, 기능주소까지만.
@@ -323,12 +313,7 @@ class ServerUtil {
 
 
         //        댓글에 좋아요 / 싫어요 찍기
-        fun postRequestReplyLikeOrDislike(
-            context: Context,
-            replyId: Int,
-            isLike: Boolean,
-            handler: JsonResponseHandler?
-        ) {
+        fun postRequestReplyLikeOrDislike(context: Context,replyId: Int,isLike: Boolean, handler: JsonResponseHandler?) {
 
 //            1. 어디로 가야? URL
             val urlString = "${HOST_URL}/topic_reply_like"
@@ -423,6 +408,49 @@ class ServerUtil {
 
             })
         }
+
+
+//        댓글 상세 조회(+대댓글 목록)
+        fun getRequestReplyDetail( context: Context, replyId: Int,handler: JsonResponseHandler?) {
+
+    val urlBuilder =
+        "${HOST_URL}/topic_reply".toHttpUrlOrNull()!!.newBuilder() //서버주소, 기능주소까지만.
+
+//          주소양식 : Path - / topic/3 => /3 PathSegment라고 부름
+//          주소양식 : Query - /topic?name=조경진 QueryParameter라고 부름
+    urlBuilder.addPathSegment(replyId.toString())
+
+//    urlBuilder.addEncodedQueryParameter("order_type", orderType)
+//            urlBuilder.addEncodedQueryParameter("value", value)
+
+    val urlString = urlBuilder.toString()
+    Log.d("완성주소", urlString)
+
+//          Request를 만들때 헤더도 같이 첨부.
+    val request = Request.Builder()
+        .url(urlString)
+        .get()
+        .header("X-Http-Token", ContextUtil.getToken(context))
+        .build()
+
+//            실제 API 호출 - client
+    val client = OkHttpClient()
+
+    client.newCall(request).enqueue(object : Callback {
+        override fun onFailure(call: Call, e: IOException) {
+
+        }
+
+        override fun onResponse(call: Call, response: Response) {
+            val bodyString = response.body!!.string()
+            val jsonObj = JSONObject(bodyString)
+            Log.d("서버응답", jsonObj.toString())
+            handler?.onResponse(jsonObj)
+        }
+
+    })
+
+}
 
     }
 
