@@ -1,6 +1,7 @@
 package com.start.a20220605_colosseum
 
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -8,6 +9,8 @@ import androidx.appcompat.widget.Toolbar
 abstract class BaseActivity : AppCompatActivity() {
 
     val mContext = this
+
+    lateinit var btnBack : ImageView
 
     abstract fun setupEvents()
     abstract fun setValues()
@@ -39,6 +42,13 @@ abstract class BaseActivity : AppCompatActivity() {
         val toolBar = defActionBar.customView.parent as Toolbar
         toolBar.setContentInsetsAbsolute(0,0)
 
+//        (액션바의 커스텀뷰에) 추가된 UI요소들을 멤버변수에 연결.
+        btnBack = defActionBar.customView.findViewById(R.id.btnBack)
 
+//        모든 화면 공통 이벤트 처리
+        btnBack.setOnClickListener {
+//            뒤로가기 : 무조건 지금 화면 종료.
+            finish()
+        }
     }
 }
